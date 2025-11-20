@@ -35,10 +35,10 @@ npm run dev
 ```
 ## 頁面展示
 ### 歡迎頁面
-![歡迎頁面](https://github.com/omm0102/AakPyChan/blob/main/%E6%AD%A1%E8%BF%8E%E9%A0%81%E9%9D%A2.png)
+![歡迎頁面](https://github.com/omm0102/AkaPyChan/blob/main/%E6%AD%A1%E8%BF%8E%E9%A0%81%E9%9D%A2.png)
 ### AI助教聊天室
-![AI助教聊天室](https://github.com/omm0102/AakPyChan/blob/main/%E5%85%A8%E8%9E%A2%E5%B9%95AI%E5%8A%A9%E6%95%99%E8%81%8A%E5%A4%A9%E5%AE%A4.png)
+![AI助教聊天室](https://github.com/omm0102/AkaPyChan/blob/main/AI%E5%8A%A9%E6%95%99%E8%81%8A%E5%A4%A9%E5%AE%A4.png)
 ### 教材學習頁面
-![教材學習頁面](https://github.com/omm0102/AakPyChan/blob/main/%E6%95%99%E6%9D%90%E5%AD%B8%E7%BF%92%E9%A0%81%E9%9D%A2.png)
+![教材學習頁面](https://github.com/omm0102/AkaPyChan/blob/main/%E6%95%99%E6%9D%90%E5%AD%B8%E7%BF%92%E7%95%AB%E9%9D%A2.png)
 ### 程式練習頁面
-![程式練習頁面](https://github.com/omm0102/AakPyChan/blob/main/%E7%A8%8B%E5%BC%8F%E7%B7%B4%E7%BF%92%E9%A0%81%E9%9D%A2.png)
+![程式練習頁面](https://github.com/omm0102/AkaPyChan/blob/main/%E7%A8%8B%E5%BC%8F%E7%B7%B4%E7%BF%92%E9%A0%81%E9%9D%A2.png)
