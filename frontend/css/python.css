@@ -1,0 +1,857 @@
+:root {
+  --bg: #0f1221;
+  --panel: #171a2e;
+  --text: #e6e8f2;
+  --muted: #9aa0b8;
+  --accent: #6ea8fe;
+  --border: rgb(58, 62, 102);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  color: #e6e8f2;
+}
+
+html,
+body {
+  font-size: clamp(14px, 1.1vw, 16px);
+  background-color: #0f1221;
+  height: 100%;
+  width: 100%;
+  will-change: opacity;
+  overflow: hidden;
+}
+html.no-trans body {
+  opacity: 0;
+}
+html.is-entering body {
+  opacity: 0;
+}
+html.is-entered body {
+  opacity: 1;
+  transition: opacity 0.28s ease;
+}
+html.is-leaving body {
+  opacity: 0;
+  transition: opacity 0.24s ease;
+}
+
+.workspace {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+.leftSideBar {
+  position: relative;
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  height: 98vh;
+  overflow: visible;
+  transition: all 0.35s ease;
+  z-index: 10;
+}
+body.sidebar-collapsed .leftSideBar {
+  transform: translate(-55px);
+  flex-basis: 80px;
+  min-width: 80px;
+}
+body.sidebar-collapsed .menuSelectionMeun,
+body.sidebar-collapsed .changeBtn {
+  opacity: 0;
+  pointer-events: none;
+}
+.menuSelectionMeun {
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 6vh - 20px);
+  border-radius: 20px;
+  background-color: var(--panel);
+  border: 2px solid var(--border);
+  overflow: hidden auto;
+  scrollbar-width: none;
+}
+.unitContent {
+  list-style: none;
+  padding: 10px 12px 12px 18px;
+}
+.backBtn {
+  display: none;
+  margin-left: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  border: solid 2px var(--border);
+  border-radius: 10px;
+}
+.backBtn:hover {
+  background-color: #354a6b;
+}
+.L-Unit {
+  font-weight: 800;
+  list-style: none;
+  user-select: none;
+  padding: 0;
+}
+.menuTitle {
+  font-size: 24px;
+}
+.M-Unit {
+  font-weight: 400;
+  padding: 0.25rem 0.5rem;
+  margin-bottom: 4px;
+  border-radius: 5px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+  list-style: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+  font-size: clamp(14px, 1.6vw, 16px);
+  white-space: normal;
+  word-break: break-word;
+  padding-left: 3.8em;
+  text-indent: -2.8em;
+}
+.M-Unit:hover {
+  background-color: #2a2e45;
+  padding-left: 3.4em;
+}
+.M-Unit.is-active {
+  background-color: #2a2e45;
+  border-radius: 8px;
+}
+#leetcode-list {
+  list-style: none;
+  padding-left: 0;
+}
+.randomPicker{
+  padding: 12px;
+  margin-top: 8px;
+  margin-right: 8px;
+  background-color: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+}
+.randomPicker p{
+  margin-bottom: 8px;
+}
+select{
+  color: var(--text);
+  background-color: var(--bg);
+  font-size: 16px;
+  padding: 4px 0;
+  margin-bottom: 8px;
+}
+option{
+  color: var(--text);
+}
+.random-submit{
+  width: 100%;
+  font-size: 14px;
+  padding: 4px;
+  border: 2px solid var(--text);
+  border-radius: 12px;
+  color: var(--text);
+  background-color: var(--bg);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.random-submit:hover{
+  background-color: #404668;
+}
+.UnitBlock {
+  margin: 0.25rem 0 0.5rem;
+}
+.UnitHeader {
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease;
+}
+.UnitHeader:hover {
+  background: #2a2e45;
+}
+.UnitInner {
+  list-style: none;
+  margin: 0.25rem 0 0.5rem 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.15); /* 垂直線 */
+}
+.UnitInner.is-collapsed {
+  display: none;
+}
+
+.UnitSubheader {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0.25rem 0 0.25rem 0.25rem;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+/* 圓點標籤基底 */
+.UnitSubheader::before {
+  content: "●";
+  font-size: 0.9em;
+}
+
+.UnitSubheader.diff-easy {
+  color: #36c26c;
+}
+.UnitSubheader.diff-easy:hover {
+  border-left: 6px solid;
+  padding-left: 12px;
+}
+.UnitSubheader.diff-medium {
+  color: #ffd95b;
+}
+.UnitSubheader.diff-medium:hover {
+  border-left: 6px solid;
+  padding-left: 12px;
+}
+.UnitSubheader.diff-hard {
+  color: #ff6b6b;
+}
+.UnitSubheader.diff-hard:hover {
+  border-left: 6px solid;
+  padding-left: 12px;
+}
+.UnitSubheader {
+  cursor: pointer;
+  user-select: none;
+  padding: 6px 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 收合時隱藏清單 */
+.DiffInner.is-collapsed {
+  display: none;
+}
+
+/* 視覺提示（可自行微調） */
+.UnitSubheader[aria-expanded="true"]::after {
+  content: "▾";
+  float: right;
+}
+.UnitSubheader[aria-expanded="false"]::after {
+  content: "▸";
+  float: right;
+}
+
+.leftsideBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -12px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.leftsideBtn:hover {
+  background-color: #404668;
+}
+.leftsideBtn img {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.3s ease;
+  transform: rotate(180deg);
+}
+body.sidebar-collapsed .leftsideBtn img {
+  transform: rotate(0);
+}
+.changeBtn {
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  max-width: 400px;
+  height: 10vh;
+  max-height: 80px;
+  line-height: 6vh;
+  font-size: 20px;
+  color: #fff;
+  background-color: var(--panel);
+  border: solid 2px var(--border);
+  border-radius: 20px;
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.changeBtn:hover {
+  background-color: #404668;
+}
+.chat-editor{
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
+.editor {
+  width: 100%;
+  height: 100%;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 12px 12px 0;
+  background-color: #000;
+  display: flex;
+  overflow: hidden;
+
+  transform-origin: top;
+  transition: all 0.3s ease;
+}
+.chat-editor .editor.shrink {
+  height: calc(50% - 6px);
+}
+.editorContainer {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+}
+
+.runBtn {
+  position: absolute;
+  height: 68px;
+  right: 38vw;
+  top: 90vh;
+  font-size: 24px;
+  padding: 18px 48px;
+  border-radius: 18px;
+  border: 2px solid #7aad8d;
+  background-color: #058f3a83;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.runBtn:hover {
+  background-color: #058f3a;
+}
+.codePane {
+  flex: 0 0 36%;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.textContent {
+  flex: 0 0 auto;
+  min-width: 280px;
+  max-height: calc(50% - 6px);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  padding: 20px;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.textContent p {
+  margin: 8px;
+}
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  font-size: 36px;
+  margin: 8px;
+}
+.description {
+  white-space: pre-line;
+  color: #eee;
+  font-size: 20px;
+  margin: 8px;
+}
+.constraintsTitle,
+.expTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+.constraintsBody,
+.exampleInput,
+.exampleOutput {
+  background: #0f1221;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.examples {
+  list-style: none;
+  padding-left: 0;
+}
+.exampleItem {
+  margin: 12px 0;
+}
+.exampleHead {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.exampleBlock {
+  margin: 8px 0;
+}
+.exampleLabel {
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+.preview {
+  flex: 1 1 auto;
+  min-height: 220px;
+  background: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.preview header {
+  background: #12162b;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
+}
+.btnContent{
+  display: flex;
+  height: auto;
+  width: auto;
+  gap: 8px;
+}
+.hintbtn, .answerbtn{
+  font-size: 16px;
+  padding: 4px 18px;
+  border-radius: 8px;
+  background-color: var(--border);
+  border: solid 1px var(--muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.answerbtn:hover{
+  background-color: var(--panel);
+}
+.hintbtn:hover{
+  background-color: var(--panel);
+}
+#output {
+  flex: 1;
+  max-height: 55vh;
+  padding: 12px;
+  font-family: monospace;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.code-block {
+  background: #0d1117;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+/* 上方標題列緊貼 code 區塊 */
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0d1117;
+  color: #ccc;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  margin: 0;
+  top: 0;
+}
+
+/* 調整複製按鈕位置 */
+.copy-btn {
+  background: none;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+}
+.copy-btn:hover {
+  color: #fff;
+}
+.lang-label {
+  font-family: monospace;
+  opacity: 0.8;
+}
+.status {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding-left: 8px;
+}
+
+.scroll-area {
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: #0f1221;          /* 你的背景色 */
+}
+.scroll-area::-webkit-scrollbar { display: none; }
+
+/* 讓最後一點空間給 sticky 元素用 */
+.scroll-area::after {
+  content: "";
+  position: sticky;
+  bottom: 0;
+  height: 40px;
+  display: block;
+  background: linear-gradient(to top, #0f1221, transparent);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.scroll-area::after { opacity: 0; transition: opacity .3s ease; }
+.scroll-area.has-overflow::after { opacity: 1; }
+
+.q-chooser {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+  flex-wrap: wrap;
+}
+.q-btn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  background: #fff;
+}
+.q-btn.active {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+.q-btn:disabled {
+  color: #999;
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+.submit-row {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.hint {
+  font-size: 12px;
+  color: #666;
+}
+.done-badge {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 12px;
+  color: #0a7;
+  background: #eafff5;
+  border: 1px solid #bff0df;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+.fade-in {
+  opacity: 0;
+  animation: py-fade-in 240ms ease-out forwards;
+}
+@keyframes py-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* 通用隱藏（用在輸出區） */
+.is-hidden {
+  display: none !important;
+}
+
+.hljs {
+  background: #0d1117 !important;
+  color: #c9d1d9 !important;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-title {
+  color: #ff7b72 !important;
+}
+.hljs-string, .hljs-number {
+  color: #a5d6ff !important;
+}
+
+.openChat b{
+  display: inline-block;
+  cursor: pointer;
+  color: var(--text);
+  border: 3px dashed var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 16px;
+  user-select: none;
+}
+
+.openChat b:hover{
+  background-color: #354a6b;
+}
+
+/* ========= RWD 高度參數 ========= */
+:root {
+  --header-h: 50px; /* header 高度 */
+  --toolbars-h: 42px; /* 工具列高度（顯示時才占位；隱藏時用 JS 改成 0px） */
+  --input-h: 60px; /* 輸入欄最小高度 */
+  --container-pad: 10px; /* 下方 buffer（含安全區） */
+}
+
+.chatbot {
+  display: flex;
+  width: 100%;
+  height: 0;
+  position: relative;
+  visibility: hidden;
+  border-radius: 12px;
+  background: var(--panel);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.chat-editor .chatbot.open {
+  height: calc(50% - 6px);
+  visibility: visible;
+  border: solid 2px var(--border);
+  margin-bottom: 12px;
+}
+
+.chatbot header {
+  height: var(--header-h);
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--panel);
+  border-bottom: solid 1px var(--border);
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  user-select: none;
+}
+.chatbot header h2 {
+  color: var(--text);
+  font-size: 30px;
+}
+.hiddenBtn{
+  position: absolute;
+  right: 18px;
+  background-color: var(--panel);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.hiddenBtn:hover{
+  background-color: #404668;
+}
+/* ========= 聊天訊息區：自動填滿剩餘高度 ========= */
+.chatbox {
+  position: absolute;
+  width: 100%;
+  top: var(--header-h);
+  bottom: calc(var(--input-h) + var(--toolbars-h) + 52px);
+  flex: 1;
+  padding: 0 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-incoming {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+.chat-incoming p {
+  max-width: min(75vw, 920px);
+  white-space: pre-line;
+  color: #fff;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.chat-incoming i {
+  height: 33px;
+  width: 33px;
+  color: #fff;
+  background: var(--border);
+  text-align: center;
+  font-size: 20px;
+  line-height: 33px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.ai-rich-content {
+  max-width: min(75vw, 920px);
+  margin: 10px;
+  padding: 12px 16px;
+  border: solid 2px var(--border);
+  background: var(--bg);
+  border-radius: 0px 10px 10px 10px;
+}
+.ai-rich-content pre {
+  max-width: min(75vw, 920px);
+  overflow: auto;
+  padding: 12px 16px;
+  border-radius: 0.5rem;
+  margin: 10px;
+}
+.ai-rich-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 18px;
+  line-height: 1.5;
+}
+strong {
+  color: #fff;
+}
+
+.code-block {
+  background: var(--bg);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+  border: dashed 2px #777;
+}
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg);
+  color: #555;
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  margin: 0; /* 緊貼上方 */
+}
+.lang-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  opacity: 0.8;
+}
+
+.chat-outgoing {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+.chat-outgoing p {
+  margin-left: auto;
+  max-width: 75%;
+  background: var(--border);
+  padding: 12px 16px;
+  border-radius: 10px 0px 10px 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.toolbar-group {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: calc(var(--input-h) + 40px);
+  z-index: 999;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 6px 12px;
+  margin: 0;
+  width: auto;
+  background: transparent;
+  user-select: none;
+}
+
+.toolbar .btn {
+  background: var(--panel);
+  color: var(--text);
+  border: solid 2px var(--border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-left: 12px;
+  cursor: pointer;
+  font-size: clamp(14px, 0.8vw, 18px);
+  transition: all 0.2s;
+}
+.toolbar .btn:hover {
+  background: #404668;
+}
+.tag {
+  margin-left: 20px;
+  font-size: clamp(18px, 0.8vw, 20px);
+  color: #90a0b5;
+  align-self: center;
+}
+
+/* ========= 輸入區固定在底部，含安全區 ========= */
+.chatinput {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  padding: 10px 10px;
+  border-radius: 30px;
+  background: var(--panel);
+  border: solid 2px var(--border);
+  min-height: var(--input-h);
+  inset: auto 10px 10px 10px;
+  z-index: 998;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+}
+.chatinput textarea {
+  background: var(--panel);
+  max-height: 70px;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  padding-top: 25px;
+  margin-left: 10px;
+  font-size: 18px;
+  align-self: center;
+}
+.chatinput i {
+  height: 40px;
+  font-size: 20px;
+  padding-top: 10px;
+  cursor: pointer;
+  align-self: center;
+  visibility: hidden;
+}
+.chatinput textarea:valid ~ i {
+  visibility: visible;
+}
