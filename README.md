@@ -10,7 +10,6 @@ AkaPyChan 是我們團隊的大學專題作品，主題為**互動式 Python 初
 ### 建立虛擬環境
 ```bash
 python3 -m venv myenv
-virtualenv myenv
 ```
 ### 進入虛擬環境
 ```bash
@@ -26,10 +25,11 @@ pip install -r requirements.txt
 ```
 ### 執行
 ```bash
-python -m uvicorn main:app --reload
+cd backend
 uvicorn main:app --reload
 ```
 ```bash
+cd backend
 npm install
 npm run dev
 ```

@@ -1,4 +1,4 @@
-import { PATHS } from "../constants.js";
+import { PATHS } from "../config/constants.js";
 
 document.querySelectorAll(".answerbtn").forEach((btn) => {
   btn.addEventListener("click", handleAnswer);

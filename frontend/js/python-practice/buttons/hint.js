@@ -1,4 +1,9 @@
-import { PATHS } from "../constants.js";
+import { PATHS } from "../config/constants.js";
+
+// 新增：粗體解析
+function parseBold(text = "") {
+  return text.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+}
 
 document.querySelectorAll(".hintbtn").forEach((btn) => {
   btn.addEventListener("click", handleHint);
@@ -40,7 +45,7 @@ export async function handleHint(e) {
       return;
     }
 
-    // 🌀 顯示動畫「分析中...」
+    // 顯示動畫「分析中...」
     stopAnim = startLoading(el, btn);
 
     const resp = await fetch(PATHS.hint, {
@@ -53,27 +58,29 @@ export async function handleHint(e) {
     });
 
     const data = await resp.json().catch(() => ({}));
+
+    // 粗體支援：任何提示都會先 parseBold
     show(data.ok ? data.hint ?? "（沒有提示）" : data.error ?? "取得提示失敗");
+
   } catch (err) {
     show(`[錯誤] ${err?.message ?? err}`);
   } finally {
-    // ✅ 停止動畫
+    // 停止動畫
     if (stopAnim) stopAnim();
   }
 }
 
 // === 輔助函式 ===
+
 function show(text) {
   const el = document.querySelector("#output");
-  if (el) el.textContent = text;
+  if (!el) return;
+  el.innerHTML = parseBold(text);
 }
 
-/**
- * 顯示「分析中...」動畫
- * @param {HTMLElement} el - 要顯示文字的元素
- * @param {HTMLElement} btn - 觸發按鈕
- * @returns {Function} 停止動畫的函式
- */
+
+//  顯示「分析中...」動畫
+
 function startLoading(el, btn) {
   if (btn) btn.disabled = true;
   if (el) el.textContent = "分析中";
@@ -84,7 +91,6 @@ function startLoading(el, btn) {
     if (el) el.textContent = "分析中" + ".".repeat(dots);
   }, 400);
 
-  // 停止動畫
   return () => {
     clearInterval(id);
     if (btn) btn.disabled = false;

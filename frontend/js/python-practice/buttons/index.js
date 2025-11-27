@@ -1,4 +1,4 @@
-import { SELECTORS } from "../constants.js";
+import { SELECTORS } from "../config/constants.js";
 import { handleRun } from "./run.js";
 import { handleHint } from "./hint.js";
 import { handleAnswer } from "./answer.js";

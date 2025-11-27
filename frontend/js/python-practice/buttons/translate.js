@@ -1,6 +1,6 @@
 // 翻譯按鈕
-import { PATHS } from '../constants.js';
-import { ensureTitleRow } from '../dom.js';
+import { PATHS } from '../config/constants.js';
+import { ensureTitleRow } from '../UI/dom.js';
 
 async function translateWithBackend(text) {
   const resp = await fetch(PATHS.translate, {

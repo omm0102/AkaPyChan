@@ -1,6 +1,6 @@
 // 判題按鈕
-import { SELECTORS, PATHS, UI } from "../constants.js";
-import { getSetId, loadCur } from "../state.js";
+import { SELECTORS, PATHS, UI } from "../config/constants.js";
+import { getSetId, loadCur } from "../core/state.js";
 
 // 在 editor 準備好後綁定執行按鈕
 export function setupRunButton() {

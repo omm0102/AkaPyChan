@@ -393,7 +393,7 @@ async def chat(request: Request):
             return {
                 "text": (
                     "=== 虛擬碼 (預覽) ===\n"
-                    f"```\n{_preview(vc_preview)}\n```\n\n"
+                    f"{_preview(vc_preview)}\n\n"
                     "是否符合需求？\n"
                     "**點「輸入框上方的按鈕」即可選擇。**"
                 )
