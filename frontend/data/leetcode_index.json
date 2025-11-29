@@ -845,7 +845,11 @@
     "title": "ZigZag Conversion",
     "tag": 611,
     "unit": 6,
+<<<<<<< HEAD
     "difficulty": "easy"
+=======
+    "difficulty": "unknown"
+>>>>>>> e497083 (local update)
   },
   {
     "file": "Leetcode/leetcode26.json",
@@ -3768,6 +3772,49 @@
     "difficulty": "medium"
   },
   {
+<<<<<<< HEAD
+=======
+    "file": "Leetcode/leetcode1154.json",
+    "id": "leetcode1154",
+    "title": "Day of the Year",
+    "tag": 823,
+    "unit": 8,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode1185.json",
+    "id": "leetcode1185",
+    "title": "Day of the Week",
+    "tag": 823,
+    "unit": 8,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode1360.json",
+    "id": "leetcode1360",
+    "title": "Number of Days Between Two Dates",
+    "tag": 830,
+    "unit": 8,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode2437.json",
+    "id": "leetcode2437",
+    "title": "Number of Valid Clock Times",
+    "tag": 822,
+    "unit": 8,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode2660.json",
+    "id": "leetcode2660",
+    "title": "Determine the Winner of a Bowling Game",
+    "tag": 823,
+    "unit": 8,
+    "difficulty": "easy"
+  },
+  {
+>>>>>>> e497083 (local update)
     "file": "Leetcode/leetcode726.json",
     "id": "leetcode726",
     "title": "Number of Atoms",
@@ -3792,6 +3839,41 @@
     "difficulty": "hard"
   },
   {
+<<<<<<< HEAD
+=======
+    "file": "Leetcode/leetcode953.json",
+    "id": "leetcode953",
+    "title": "Verifying an Alien Dictionary",
+    "tag": 910,
+    "unit": 9,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode960.json",
+    "id": "leetcode960",
+    "title": "Delete Columns to Make Sorted III",
+    "tag": 910,
+    "unit": 9,
+    "difficulty": "hard"
+  },
+  {
+    "file": "Leetcode/leetcode961.json",
+    "id": "leetcode961",
+    "title": "N-Repeated Element in Size 2N Array",
+    "tag": 930,
+    "unit": 9,
+    "difficulty": "easy"
+  },
+  {
+    "file": "Leetcode/leetcode967.json",
+    "id": "leetcode967",
+    "title": "Longest Turbulent Subarray",
+    "tag": 910,
+    "unit": 9,
+    "difficulty": "medium"
+  },
+  {
+>>>>>>> e497083 (local update)
     "file": "Leetcode/leetcode691.json",
     "id": "leetcode691",
     "title": "Stickers to Spell Word",
@@ -4168,11 +4250,33 @@
     "difficulty": "hard"
   },
   {
+<<<<<<< HEAD
+=======
+    "file": "Leetcode/leetcode1603.json",
+    "id": "leetcode1603",
+    "title": "Design Parking System",
+    "tag": 1120,
+    "unit": 11,
+    "difficulty": "easy"
+  },
+  {
+>>>>>>> e497083 (local update)
     "file": "Leetcode/leetcode721.json",
     "id": "leetcode721",
     "title": "Accounts Merge",
     "tag": 1220,
     "unit": 12,
     "difficulty": "medium"
+<<<<<<< HEAD
+=======
+  },
+  {
+    "file": "Leetcode/leetcode1792.json",
+    "id": "leetcode1792",
+    "title": "Maximum Average Pass Ratio",
+    "tag": 1210,
+    "unit": 12,
+    "difficulty": "medium"
+>>>>>>> e497083 (local update)
   }
 ]

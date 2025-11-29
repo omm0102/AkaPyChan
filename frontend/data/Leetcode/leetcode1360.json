@@ -1,0 +1,24 @@
+{
+  "ID": "leetcode1360",
+  "coding_practice": [
+    {
+      "title": "Number of Days Between Two Dates",
+      "description": "Given two dates, return the number of days between the two dates. \nThe two dates are given as strings in the format 'YYYY-MM-DD'.",
+      "examples": [
+        {
+          "input": "date1 = '2019-06-29', date2 = '2019-06-30'",
+          "output": "1"
+        },
+        {
+          "input": "date1 = '2020-01-15', date2 = '2019-12-31'",
+          "output": "15"
+        }
+      ],
+      "constraints": "The given dates are valid dates between the years 1971 and 2100.",
+      "solution": "from datetime import date\n\nclass Solution(object):\n    def daysBetweenDates(self, date1, date2):\n        y1, m1, d1 = map(int, date1.split('-'))\n        y2, m2, d2 = map(int, date2.split('-'))\n        dt1 = date(y1, m1, d1)\n        dt2 = date(y2, m2, d2)\n        return abs((dt2 - dt1).days)",
+      "explanation": "1. 使用 `split('-')` 將日期字串分成年、月、日。\n2. 使用 `datetime.date()` 轉換為日期物件。\n3. 相減得到 `timedelta` 物件，取其 `.days` 即可得到天數差。\n4. 使用 `abs()` 取絕對值以確保順序無關。",
+      "tag": "830",
+      "difficult": "easy"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "ID": "leetcode1792",
+  "coding_practice": [
+    {
+      "title": "Maximum Average Pass Ratio",
+      "description": "There is a school that has classes of students and each class will be having a final exam. You are given a 2D integer array classes, where classes[i] = [passi, totali]. You know beforehand that in the ith class, there are totali total students, but only passi number of students will pass the exam.\n\nYou are also given an integer extraStudents. There are another extraStudents brilliant students that are guaranteed to pass the exam of any class they are assigned to. You want to assign each of the extraStudents students to a class in a way that maximizes the average pass ratio across all the classes.\n\nThe pass ratio of a class is equal to the number of students of the class that will pass the exam divided by the total number of students of the class. The average pass ratio is the sum of pass ratios of all the classes divided by the number of the classes.\n\nReturn the maximum possible average pass ratio after assigning the extraStudents students. Answers within 10-5 of the actual answer will be accepted.",
+      "examples": [
+        {
+          "input": "classes = [[1,2],[3,5],[2,2]], extraStudents = 2",
+          "output": "0.78333",
+          "explanation": "You can assign the two extra students to the first class. The average pass ratio will be equal to (3/4 + 3/5 + 2/2) / 3 = 0.78333."
+        },
+        {
+          "input": "classes = [[2,4],[3,9],[4,5],[2,10]], extraStudents = 4",
+          "output": "0.53485"
+        }
+      ],
+      "constraints": "1 <= classes.length <= 10^5\nclasses[i].length == 2\n1 <= passi <= totali <= 10^5\n1 <= extraStudents <= 10^5",
+      "solution": "import heapq\nimport json\n\nclass Solution(object):\n    def maxAverageRatio(self, classes, extraStudents):\n        \"\"\"\n        :type classes: List[List[int]]\n        :type extraStudents: int\n        :rtype: float\n        \"\"\"\n        # JSON 練習：轉換輸入\n        classes = json.loads(json.dumps(classes))\n        extraStudents = json.loads(json.dumps(extraStudents))\n\n        def gain(pass_i, total_i):\n            return (float(pass_i + 1) / (total_i + 1)) - (float(pass_i) / total_i)\n\n        heap = []\n        for p, t in classes:\n            heapq.heappush(heap, (-gain(p, t), float(p), float(t)))\n\n        for _ in range(extraStudents):\n            g, p, t = heapq.heappop(heap)\n            p += 1\n            t += 1\n            heapq.heappush(heap, (-gain(p, t), p, t))\n\n        total_ratio = sum(p/t for _, p, t in heap)\n        avg_ratio = total_ratio / len(classes)\n\n        # JSON 練習：轉換結果\n        avg_ratio_json = json.loads(json.dumps(avg_ratio))\n        return avg_ratio_json",
+      "explanation": "1. 將輸入 classes 和 extraStudents 使用 json.dumps() / json.loads() 轉成 JSON，練習 JSON 處理。\n2. 使用最大堆(heapq)來選擇每一步增益最大的班級。\n3. gain 函數計算新增一名學生後 pass ratio 的增量，注意使用 float 避免 Python2 整數除法。\n4. 對每個額外學生，分配到增益最大的班級，並更新堆。\n5. 最終計算所有班級的平均 pass ratio，並再次使用 JSON 處理結果。",
+      "tag": "1210",
+      "difficult": "medium"
+    }
+  ]
+}

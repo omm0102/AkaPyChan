@@ -1,0 +1,29 @@
+{
+  "ID": "leetcode978",
+  "coding_practice": [
+    {
+      "title": "Longest Turbulent Subarray",
+      "description": "Given an integer array arr, return the length of a maximum size turbulent subarray of arr.\n\nA subarray is turbulent if the comparison sign flips between each adjacent pair of elements in the subarray.\n\nMore formally, a subarray [arr[i], arr[i + 1], ..., arr[j]] of arr is said to be turbulent if and only if:\n\nFor i <= k < j:\narr[k] > arr[k + 1] when k is odd, and\narr[k] < arr[k + 1] when k is even.\nOr, for i <= k < j:\narr[k] > arr[k + 1] when k is even, and\narr[k] < arr[k + 1] when k is odd.",
+      "examples": [
+        {
+          "input": "arr = [9,4,2,10,7,8,8,1,9]",
+          "output": "5",
+          "explanation": "arr[1] > arr[2] < arr[3] > arr[4] < arr[5]"
+        },
+        {
+          "input": "arr = [4,8,12,16]",
+          "output": "2"
+        },
+        {
+          "input": "arr = [100]",
+          "output": "1"
+        }
+      ],
+      "constraints": "1 <= arr.length <= 4 * 10^4\n0 <= arr[i] <= 10^9",
+      "solution": "class Solution(object):\n    def maxTurbulenceSize(self, A):\n        \"\"\"\n        :type A: List[int]\n        :rtype: int\n        \"\"\"\n        if not A:\n            return 0\n        \n        n = len(A)\n        if n == 1:\n            return 1\n        \n        max_len = 1\n        up = 1  # 以 i 結尾的上升子陣列長度\n        down = 1  # 以 i 結尾的下降子陣列長度\n        \n        for i in range(1, n):\n            try:\n                if A[i] > A[i-1]:\n                    up = down + 1\n                    down = 1\n                elif A[i] < A[i-1]:\n                    down = up + 1\n                    up = 1\n                else:\n                    up = down = 1\n                max_len = max(max_len, up, down)\n            except IndexError:\n                # 捕捉極端邊界情況\n                pass\n        \n        return max_len",
+      "explanation": "1. 使用兩個變數 up 和 down 追蹤以當前元素結尾的上升或下降 turbulent 子陣列長度。\n2. 遍歷陣列，依據前後元素比較更新 up 和 down。\n3. 當相等時重置 up 和 down 為 1。\n4. max_len 在每一步更新為當前最大 turbulent 長度。\n5. try/except 用於捕捉極端邊界索引錯誤，確保程式不崩潰。",
+      "tag": "910",
+      "difficult": "medium"
+    }
+  ]
+}

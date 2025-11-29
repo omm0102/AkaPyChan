@@ -1,0 +1,28 @@
+{
+  "ID": "leetcode961",
+  "coding_practice": [
+    {
+      "title": "N-Repeated Element in Size 2N Array",
+      "description": "You are given an integer array nums with the following properties:\n\nnums.length == 2 * n.\nnums contains n + 1 unique elements.\nExactly one element of nums is repeated n times.\nReturn the element that is repeated n times.",
+      "examples": [
+        {
+          "input": "nums = [1,2,3,3]",
+          "output": "3"
+        },
+        {
+          "input": "nums = [2,1,2,5,3,2]",
+          "output": "2"
+        },
+        {
+          "input": "nums = [5,1,5,2,5,3,5,4]",
+          "output": "5"
+        }
+      ],
+      "constraints": "2 <= n <= 5000\nnums.length == 2 * n\n0 <= nums[i] <= 10^4\nnums contains n + 1 unique elements and one of them is repeated exactly n times.",
+      "solution": "class InvalidInputError(Exception):\n    pass\n\nclass Solution(object):\n    def repeatedNTimes(self, nums):\n        \"\"\"\n        :type nums: List[int]\n        :rtype: int\n        \"\"\"\n        n = len(nums) // 2\n        if len(nums) % 2 != 0 or len(set(nums)) != n + 1:\n            raise InvalidInputError(\"Input array length must be 2N and contain N+1 unique elements.\")\n        \n        seen = set()\n        for num in nums:\n            if num in seen:\n                return num\n            seen.add(num)\n        \n        raise InvalidInputError(\"No element repeated N times found.\")",
+      "explanation": "1. 定義自訂例外 InvalidInputError，用於處理輸入不符合規範的情況。\n2. 計算 n = len(nums)//2，並檢查 nums 是否符合長度和唯一元素數量的規範，若不符合則 raise 錯誤。\n3. 使用 set 記錄已經遇過的元素，一旦再次出現即為重複 n 次的元素，回傳該元素。\n4. 理論上題目保證一定有解，如果找不到則 raise 例外以防意外。",
+      "tag": "930",
+      "difficult": "easy"
+    }
+  ]
+}

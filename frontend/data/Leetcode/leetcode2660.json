@@ -1,0 +1,36 @@
+{
+  "ID": "leetcode2660",
+  "coding_practice": [
+    {
+      "title": "Determine the Winner of a Bowling Game",
+      "description": "You are given two 0-indexed integer arrays player1 and player2, representing the number of pins that player 1 and player 2 hit in a bowling game, respectively.\n\nThe bowling game consists of n turns, and the number of pins in each turn is exactly 10.\n\nAssume a player hits xi pins in the ith turn. The value of the ith turn for the player is:\n\n2xi if the player hits 10 pins in either (i - 1)th or (i - 2)th turn.\nOtherwise, it is xi.\nThe score of the player is the sum of the values of their n turns.\n\nReturn\n\n1 if the score of player 1 is more than the score of player 2,\n2 if the score of player 2 is more than the score of player 1, and\n0 in case of a draw.",
+      "examples": [
+        {
+          "input": "player1 = [5,10,3,2], player2 = [6,5,7,3]",
+          "output": "1",
+          "explanation": "The score of player 1 is 5 + 10 + 2*3 + 2*2 = 25.\nThe score of player 2 is 6 + 5 + 7 + 3 = 21."
+        },
+        {
+          "input": "player1 = [3,5,7,6], player2 = [8,10,10,2]",
+          "output": "2",
+          "explanation": "The score of player 1 is 3 + 5 + 7 + 6 = 21.\nThe score of player 2 is 8 + 10 + 2*10 + 2*2 = 42."
+        },
+        {
+          "input": "player1 = [2,3], player2 = [4,1]",
+          "output": "0",
+          "explanation": "The score of player1 is 2 + 3 = 5.\nThe score of player2 is 4 + 1 = 5."
+        },
+        {
+          "input": "player1 = [1,1,1,10,10,10,10], player2 = [10,10,10,10,1,1,1]",
+          "output": "2",
+          "explanation": "The score of player1 is 1 + 1 + 1 + 10 + 2*10 + 2*10 + 2*10 = 73.\nThe score of player2 is 10 + 2*10 + 2*10 + 2*10 + 2*1 + 2*1 + 1 = 75."
+        }
+      ],
+      "constraints": "n == player1.length == player2.length\n1 <= n <= 1000\n0 <= player1[i], player2[i] <= 10",
+      "solution": "class Solution(object):\n    def total(self,player):\n        total_score = 0\n        for i in range(len(player)):\n            if (i > 0 and player[i-1] == 10) or (i > 1 and player[i-2] == 10):\n                total_score += 2 * player[i]\n            else:\n                total_score += player[i]\n        return total_score\n\n    def isWinner(self, player1, player2):\n        ans = 0\n        player1val = self.total(player1)\n        player2val = self.total(player2)\n        if player1val > player2val:\n            ans = 1\n        elif player1val < player2val:\n            ans = 2\n        return ans",
+      "explanation": "1. 定義 total 函式計算每位玩家的總分。\n2. 遍歷每一輪，若前一輪或前兩輪擊中 10 個瓶子，則本輪分數加倍，否則使用原分數。\n3. 計算完 player1 與 player2 的總分後比較大小。\n4. 若 player1 總分較高回傳 1，player2 較高回傳 2，平手回傳 0。",
+      "tag": "823",
+      "difficult": "easy"
+    }
+  ]
+}

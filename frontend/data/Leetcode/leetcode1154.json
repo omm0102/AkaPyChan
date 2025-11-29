@@ -1,0 +1,25 @@
+{
+  "ID": "leetcode1154",
+  "coding_practice": [
+    {
+      "title": "Day of the Year",
+      "description": "Given a string date representing a Gregorian calendar date formatted as YYYY-MM-DD, return the day number of the year.",
+      "examples": [
+        {
+          "input": "date = \"2019-01-09\"",
+          "output": "9",
+          "explanation": "Given date is the 9th day of the year in 2019."
+        },
+        {
+          "input": "date = \"2019-02-10\"",
+          "output": "41"
+        }
+      ],
+      "constraints": "date.length == 10\ndate[4] == date[7] == '-', and all other date[i]'s are digits\ndate represents a calendar date between Jan 1st, 1900 and Dec 31st, 2019.",
+      "solution": "class Solution(object):\n    def dayOfYear(self, date):\n        \"\"\"\n        :type date: str\n        :rtype: int\n        \"\"\"\n        year, month, day = map(int, date.split('-'))\n        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n        \n        # Leap year check\n        if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):\n            days_in_month[1] = 29\n        \n        return sum(days_in_month[:month-1]) + day",
+      "explanation": "1. 將輸入字串拆分成年、月、日。\n2. 建立每個月份的天數列表 days_in_month。\n3. 判斷是否為閏年，如是則二月天數設為 29。\n4. 計算前面月份的總天數加上當月天數，即為該日期在該年的第幾天。",
+      "tag": "823",
+      "difficult": "easy"
+    }
+  ]
+}

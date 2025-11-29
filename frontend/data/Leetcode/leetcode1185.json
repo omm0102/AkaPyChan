@@ -1,0 +1,28 @@
+{
+  "ID": "leetcode1185",
+  "coding_practice": [
+    {
+      "title": "Day of the Week",
+      "description": "Given a date, return the corresponding day of the week for that date. The input is given as three integers representing the day, month, and year respectively. Return the answer as one of {\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"}. \n\nNote: January 1, 1971 was a Friday.",
+      "examples": [
+        {
+          "input": "day = 31, month = 8, year = 2019",
+          "output": "\"Saturday\""
+        },
+        {
+          "input": "day = 18, month = 7, year = 1999",
+          "output": "\"Sunday\""
+        },
+        {
+          "input": "day = 15, month = 8, year = 1993",
+          "output": "\"Sunday\""
+        }
+      ],
+      "constraints": "The given dates are valid dates between the years 1971 and 2100.",
+      "solution": "import datetime\n\nclass Solution(object):\n    def dayOfTheWeek(self, day, month, year):\n        days = [\"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\", \"Sunday\"]\n        return days[datetime.date(year, month, day).weekday()]",
+      "explanation": "1. 使用 Python 內建模組 `datetime` 來處理日期。\n2. `datetime.date(year, month, day).weekday()` 會回傳一個整數，代表星期幾（0=Monday, 6=Sunday）。\n3. 透過 `days` 列表將整數轉換成對應的星期字串。",
+      "tag": "823",
+      "difficult": "easy"
+    }
+  ]
+}

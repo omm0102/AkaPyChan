@@ -1,0 +1,31 @@
+{
+  "ID": "leetcode2437",
+  "coding_practice": [
+    {
+      "title": "Number of Valid Clock Times",
+      "description": "You are given a string of length 5 called time, representing the current time on a digital clock in the format \"hh:mm\". The earliest possible time is \"00:00\" and the latest possible time is \"23:59\".\n\nIn the string time, the digits represented by the ? symbol are unknown, and must be replaced with a digit from 0 to 9.\n\nReturn an integer answer, the number of valid clock times that can be created by replacing every ? with a digit from 0 to 9.",
+      "examples": [
+        {
+          "input": "time = \"?5:00\"",
+          "output": "2",
+          "explanation": "We can replace the ? with either a 0 or 1, producing \"05:00\" or \"15:00\". Note that we cannot replace it with a 2, since the time \"25:00\" is invalid. In total, we have two choices."
+        },
+        {
+          "input": "time = \"0?:0?\"",
+          "output": "100",
+          "explanation": "Each ? can be replaced by any digit from 0 to 9, so we have 100 total choices."
+        },
+        {
+          "input": "time = \"??:??\"",
+          "output": "1440",
+          "explanation": "There are 24 possible choices for the hours, and 60 possible choices for the minutes. In total, we have 24 * 60 = 1440 choices."
+        }
+      ],
+      "constraints": "time is a valid string of length 5 in the format \"hh:mm\".\n\"00\" <= hh <= \"23\"\n\"00\" <= mm <= \"59\"\nSome of the digits might be replaced with '?' and need to be replaced with digits from 0 to 9.",
+      "solution": "class Solution(object):\n    def countTime(self, time):\n        \"\"\"\n        :type time: str\n        :rtype: int\n        \"\"\"\n        h, m = time.split(':')\n        \n        # Count possible hours\n        if h[0] == '?' and h[1] == '?':\n            hours = 24\n        elif h[0] == '?':\n            hours = 3 if int(h[1]) < 4 else 2\n        elif h[1] == '?':\n            hours = 10 if h[0] == '0' or h[0] == '1' else 4\n        else:\n            hours = 1\n        \n        # Count possible minutes\n        if m[0] == '?' and m[1] == '?':\n            minutes = 60\n        elif m[0] == '?':\n            minutes = 6\n        elif m[1] == '?':\n            minutes = 10\n        else:\n            minutes = 1\n        \n        return hours * minutes",
+      "explanation": "1. 將時間字串分為小時 h 與分鐘 m。\n2. 計算小時部分可能的選擇：\n   - '??' -> 24 種\n   - '?x' -> 根據 x 限制，可能 2 或 3 種\n   - 'x?' -> 根據 x 限制，可能 4 或 10 種\n   - 其他固定 -> 1 種\n3. 計算分鐘部分可能的選擇：\n   - '??' -> 60 種\n   - '?x' -> 6 種\n   - 'x?' -> 10 種\n   - 其他固定 -> 1 種\n4. 小時可能數 * 分鐘可能數即為答案。",
+      "tag": "822",
+      "difficult": "easy"
+    }
+  ]
+}
